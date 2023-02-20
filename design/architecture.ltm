@@ -1,0 +1,34 @@
+scene: "User visits TAMMY.net"
+browser nginx: "GET /"
+nginx static_store: "Fetch index.html"
+nginx browser: "Static Content with MD Library"
+browser md-block: "Fetch Markdown Rendering Library"
+
+scene: "User submits LTM"
+browser nginx: "POST ltm string"
+nginx gunicorn: "POST ltm string"
+gunicorn django: "Route ltm string"
+django ltm: "Parse ltm string to JSON"
+django jtg: "Generate images, Markdown"
+jtg dynamic_store: "Store images, Markdown"
+django gunicorn: "Link to Markdown in dynamic_sto"
+gunicorn nginx: "Link to Markdown in dynamic_store"
+nginx browser: "Markdown link"
+browser browser: "Render"
+browser nginx: "GET /markdown link"
+nginx dynamic_store: "GET /markdown link"
+
+describe browser: "User's web browser"
+describe nginx: "Front end proxy"
+describe static_store: "Content created by TAMMY developers"
+describe md-block: "Publicly available Markdown to HTML library - pulled via CDN"
+describe django: "Python django framework"
+describe ltm: "Lightweight Threat Modeller - generates JSON"
+describe jtg: "The LTM renderer"
+describe dynamic_store: "User generated content"
+
+boundary "User": browser
+boundary "Internet": md-block
+boundary "Nginx": nginx static_store dynamic_store   
+boundary "App": django jtg ltm
+boundary "Docker Containers": "Nginx" "App"

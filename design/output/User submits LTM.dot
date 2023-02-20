@@ -1,0 +1,48 @@
+digraph G {
+compound=true;
+rankdir="LR";
+    subgraph cluster1 {
+    rankdir="TB";
+    label="User submits LTM";
+    color="Black";
+        node7 [label="gunicorn" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+        subgraph cluster2 {
+        rankdir="TB";
+        label="Docker Containers";
+        color="Coral1";
+            subgraph cluster3 {
+            rankdir="TB";
+            label="Nginx";
+            color="Coral1";
+                node4 [label="nginx" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+                node12 [label="dynamic_store" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+            }
+            subgraph cluster8 {
+            rankdir="TB";
+            label="App";
+            color="Coral1";
+                node9 [label="django" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+                node10 [label="ltm" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+                node11 [label="jtg" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+            }
+        }
+        subgraph cluster5 {
+        rankdir="TB";
+        label="User";
+        color="Coral1";
+            node6 [label="browser" shape="box", margin="0.1", color="Grey", fontsize="13", fontname="Helvetica"];
+        }
+    }
+node6->node4 [label="1.POST ltm string" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node4->node7 [label="2.POST ltm string" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node7->node9 [label="3.Route ltm string" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node9->node10 [label="4.Parse ltm string to JSON" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node9->node11 [label="5.Generate images, Markdown" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node11->node12 [label="6.Store images, Markdown" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node9->node7 [label="7.Link to Markdown in dynamic_sto" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node7->node4 [label="8.Link to Markdown in dynamic_store" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node4->node6 [label="9.Markdown link" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node6->node6 [label="10.Render" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node6->node4 [label="11.GET /markdown link" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+node4->node12 [label="12.GET /markdown link" fontsize="13", penwidth="1.2", arrowsize="0.8", fontname="Helvetica"];
+}
