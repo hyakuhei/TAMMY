@@ -6,7 +6,7 @@
 | browser | User's web browser |
 | django | Python django framework |
 | dynamic_store | User generated content |
-| gunicorn | - |
+| gunicorn | Gunicorn webserver in front of django |
 | jtg | The LTM renderer |
 | ltm | Lightweight Threat Modeller - generates JSON |
 | md-block | Publicly available Markdown to HTML library - pulled via CDN |

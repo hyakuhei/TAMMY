@@ -22,6 +22,7 @@ describe browser: "User's web browser"
 describe nginx: "Front end proxy"
 describe static_store: "Content created by TAMMY developers"
 describe md-block: "Publicly available Markdown to HTML library - pulled via CDN"
+describe gunicorn: "Gunicorn webserver in front of django"
 describe django: "Python django framework"
 describe ltm: "Lightweight Threat Modeller - generates JSON"
 describe jtg: "The LTM renderer"
@@ -30,5 +31,5 @@ describe dynamic_store: "User generated content"
 boundary "User": browser
 boundary "Internet": md-block
 boundary "Nginx": nginx static_store dynamic_store   
-boundary "App": django jtg ltm
+boundary "App": gunicorn django jtg ltm
 boundary "Docker Containers": "Nginx" "App"
