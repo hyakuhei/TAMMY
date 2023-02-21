@@ -7,6 +7,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    volumes:
+      - ./static:/var/www/static:ro
     env_file:
       - ./.env.dev
 
@@ -17,5 +19,7 @@ services:
       - ./app/:/usr/src/app/
     ports:
       - 8000:8000
+
+    # Note that theres a .env.demo file in the GitHub
     env_file:
       - ./.env.dev
